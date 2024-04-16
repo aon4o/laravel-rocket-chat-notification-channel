@@ -49,6 +49,8 @@ Add your RocketChat API server's base url, incoming Webhook Token and optionally
      // Base URL for RocketChat API server (https://your.rocketchat.server.com)
     'url' => env('ROCKETCHAT_URL'),
     'token' => env('ROCKETCHAT_TOKEN'),
+    // Default user id (optional)
+    'user_id' => env('ROCKETCHAT_USER_ID'),
     // Default channel (optional)
     'channel' => env('ROCKETCHAT_CHANNEL'),
 ],
