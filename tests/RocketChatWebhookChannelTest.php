@@ -26,12 +26,19 @@ final class RocketChatWebhookChannelTest extends TestCase
 
         $apiBaseUrl = 'http://localhost:3000';
         $token = ':token';
+        $user_id = ':user_id';
         $channel = ':channel';
 
         $client->shouldReceive('post')->once()
             ->with(
-                "{$apiBaseUrl}/hooks/{$token}",
+                "{$apiBaseUrl}/api/v1/chat.postMessage",
                 [
+                    'headers' => [
+                        'X-Auth-Token' => $token,
+                        'X-User-Id' => $user_id,
+                        'Rocket-Channel-Id' => $channel,
+                        'Content-Type' => 'application/json'
+                    ],
                     'json' => [
                         'text' => 'hello',
                         'channel' => $channel,
@@ -39,7 +46,7 @@ final class RocketChatWebhookChannelTest extends TestCase
                 ]
             )->andReturn(new Response(200));
 
-        $rocketChat = new RocketChat($client, $apiBaseUrl, $token, $channel);
+        $rocketChat = new RocketChat($client, $apiBaseUrl, $token, $user_id, $channel);
         $channel = new RocketChatWebhookChannel($rocketChat);
         $channel->send(new TestNotifiable(), new TestNotification());
     }
@@ -51,12 +58,19 @@ final class RocketChatWebhookChannelTest extends TestCase
 
         $apiBaseUrl = 'http://localhost:3000';
         $token = ':token';
+        $user_id = ':user_id';
         $channel = ':channel';
 
         $client->shouldReceive('post')->once()
             ->with(
-                "{$apiBaseUrl}/hooks/{$token}",
+                "{$apiBaseUrl}/api/v1/chat.postMessage",
                 [
+                    'headers' => [
+                        'X-Auth-Token' => $token,
+                        'X-User-Id' => $user_id,
+                        'Rocket-Channel-Id' => $channel,
+                        'Content-Type' => 'application/json'
+                    ],
                     'json' => [
                         'text' => 'hello',
                         'channel' => $channel,
@@ -64,7 +78,7 @@ final class RocketChatWebhookChannelTest extends TestCase
                 ]
             )->andThrow(new \Exception('Test'));
 
-        $rocketChat = new RocketChat($client, $apiBaseUrl, $token, $channel);
+        $rocketChat = new RocketChat($client, $apiBaseUrl, $token, $user_id, $channel);
         $channel = new RocketChatWebhookChannel($rocketChat);
         $channel->send(new TestNotifiable(), new TestNotification());
     }
@@ -73,7 +87,7 @@ final class RocketChatWebhookChannelTest extends TestCase
     {
         $this->expectException(CouldNotSendNotification::class);
 
-        $rocketChat = new RocketChat(new GuzzleHttpClient(), '', '', '');
+        $rocketChat = new RocketChat(new GuzzleHttpClient(), '', '', '', '', '');
         $channel = new RocketChatWebhookChannel($rocketChat);
         $channel->send(new TestNotifiable(), new TestNotificationWithMissedChannel());
     }
@@ -82,7 +96,7 @@ final class RocketChatWebhookChannelTest extends TestCase
     {
         $this->expectException(CouldNotSendNotification::class);
 
-        $rocketChat = new RocketChat(new GuzzleHttpClient(), '', '', '');
+        $rocketChat = new RocketChat(new GuzzleHttpClient(), '', '', '', '');
         $channel = new RocketChatWebhookChannel($rocketChat);
         $channel->send(new TestNotifiable(), new TestNotificationWithMissedFrom());
     }
