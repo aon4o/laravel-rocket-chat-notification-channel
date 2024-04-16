@@ -37,7 +37,7 @@ final class RocketChatWebhookChannelTest extends TestCase
                         'X-Auth-Token' => $token,
                         'X-User-Id' => $user_id,
                         'Rocket-Channel-Id' => $channel,
-                        'Content-Type' => 'application/json'
+                        'Content-Type' => 'application/json',
                     ],
                     'json' => [
                         'text' => 'hello',
@@ -69,7 +69,7 @@ final class RocketChatWebhookChannelTest extends TestCase
                         'X-Auth-Token' => $token,
                         'X-User-Id' => $user_id,
                         'Rocket-Channel-Id' => $channel,
-                        'Content-Type' => 'application/json'
+                        'Content-Type' => 'application/json',
                     ],
                     'json' => [
                         'text' => 'hello',

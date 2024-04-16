@@ -75,7 +75,7 @@ final class RocketChat
                 'X-Auth-Token' => $this->token,
                 'X-User-Id' => $this->userId,
                 'Rocket-Channel-Id' => $to,
-                'Content-Type' => 'application/json'
+                'Content-Type' => 'application/json',
             ],
             'json' => array_merge($message, [
                 'channel' => $to,
