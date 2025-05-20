@@ -1,6 +1,4 @@
-# Rocket.Chat Laravel Notifications Channel
-
-![cog-laravel-rocket-chat-notification-channel](https://user-images.githubusercontent.com/1849174/74969369-87649980-542d-11ea-9692-c6f7ba68e2bf.png)
+# Rocket.Chat REST API Laravel Notifications Channel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/rocket-chat.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/rocket-chat)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -12,7 +10,8 @@
 
 ## Introduction
 
-This package makes it easy to send notifications using [RocketChat](https://rocket.chat/) with Laravel 5.6+. 
+This package makes it easy to send notifications using [RocketChat](https://rocket.chat/) with Laravel 5.6+.
+The package uses the REST API of RocketChat to send messages to channels instead of using the Webhooks method.
 
 ## Contents
 
@@ -33,7 +32,7 @@ This package makes it easy to send notifications using [RocketChat](https://rock
 You can install the package via composer:
 
 ```shell script
-$ composer require laravel-notification-channels/rocket-chat
+$ composer require aon4o/laravel-rocket-chat-notification-channel
 ```
 
 ### Setting up the RocketChat service
@@ -206,9 +205,9 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Credits
 
-- [Anton Komarev]
-- [Nicholas]
-- [atymic]
+- [Anton Komarev](https://komarev.com)
+- [Nicholas](https://github.com/Funfare)
+- [atymic](https://github.com/atymic)
 - [All Contributors](../../contributors)
 
 ## Change log
@@ -219,13 +218,3 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-## About CyberCog
-
-[CyberCog] is a Social Unity of enthusiasts. Research best solutions in product & software development is our passion.
-
-![cybercog-logo](https://cloud.githubusercontent.com/assets/1849174/18418932/e9edb390-7860-11e6-8a43-aa3fad524664.png)
-
-[Anton Komarev]: https://komarev.com
-[Nicholas]: https://github.com/Funfare
-[atymic]: https://github.com/atymic
-[CyberCog]: https://cybercog.su
