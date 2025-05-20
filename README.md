@@ -1,8 +1,8 @@
 # Rocket.Chat REST API Laravel Notifications Channel
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/aon4o/laravel-rocket-chat-notification-channel.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/rocket-chat)
+![Packagist Version](https://img.shields.io/packagist/v/aon4o/laravel-rocket-chat-notification-channel?style=flat-square&logo=packagist)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/rocket-chat.svg?style=flat-square)](https://packagist.org/packages/aon4o/laravel-rocket-chat-notification-channel)
+[![Total Downloads](https://img.shields.io/packagist/dt/aon4o/laravel-rocket-chat-notification-channel.svg?style=flat-square)](https://packagist.org/packages/aon4o/laravel-rocket-chat-notification-channel)
 
 ## Introduction
 
