@@ -16,9 +16,9 @@ The package uses the REST API of RocketChat to send messages to channels instead
 ## Contents
 
 - [Installation](#installation)
-	- [Setting up the RocketChat service](#setting-up-the-rocketchat-service)
+    - [Setting up the RocketChat service](#setting-up-the-rocketchat-service)
 - [Usage](#usage)
-	- [Available Message methods](#available-message-methods)
+    - [Available Message methods](#available-message-methods)
 - [Changelog](#changelog)
 - [Testing](#testing)
 - [Security](#security)
@@ -37,9 +37,11 @@ $ composer require aon4o/laravel-rocket-chat-notification-channel
 
 ### Setting up the RocketChat service
 
-In order to send message to RocketChat channels, you need to obtain [Webhook](https://rocket.chat/docs/administrator-guides/integrations#how-to-create-a-new-incoming-webhook).
+In order to send message to RocketChat channels, you need to
+obtain [Webhook](https://rocket.chat/docs/administrator-guides/integrations#how-to-create-a-new-incoming-webhook).
 
-Add your RocketChat API server's base url, incoming Webhook Token and optionally the default channel to your `config/services.php`:
+Add your RocketChat API server's base url, incoming Webhook Token and optionally the default channel to your
+`config/services.php`:
 
 ```php
 // config/services.php
@@ -83,7 +85,8 @@ class TaskCompleted extends Notification
 }
 ```
 
-In order to let your notification know which RocketChat channel you are targeting, add the `routeNotificationForRocketChat` method to your Notifiable model:
+In order to let your notification know which RocketChat channel you are targeting, add the
+`routeNotificationForRocketChat` method to your Notifiable model:
 
 ```php
 public function routeNotificationForRocketChat(): string
@@ -198,10 +201,6 @@ $ vendor/bin/phpunit
 ## Security
 
 If you discover any security related issues, please email open@cybercog.su instead of using the issue tracker.
-
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Credits
 
