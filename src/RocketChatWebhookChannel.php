@@ -11,13 +11,14 @@ use NotificationChannels\RocketChat\Exceptions\CouldNotSendNotification;
 
 final class RocketChatWebhookChannel
 {
-    /** @var \NotificationChannels\RocketChat\RocketChat The HTTP client instance. */
-    private $rocketChat;
+    /** @var RocketChat The HTTP client instance. */
+    private RocketChat $rocketChat;
 
     /**
      * Create a new RocketChat channel instance.
      *
-     * @param  \NotificationChannels\RocketChat\RocketChat $rocketChat
+     * @param  RocketChat  $rocketChat
+     *
      * @return void
      */
     public function __construct(RocketChat $rocketChat)
@@ -29,29 +30,32 @@ final class RocketChatWebhookChannel
      * Send the given notification.
      *
      * @param  mixed  $notifiable
-     * @param  \Illuminate\Notifications\Notification $notification
+     * @param  Notification  $notification
+     *
      * @return void
      *
-     * @throws \NotificationChannels\RocketChat\Exceptions\CouldNotSendNotification
+     * @throws CouldNotSendNotification
      */
-    public function send($notifiable, Notification $notification): void
+    public function send(mixed $notifiable, Notification $notification): void
     {
-        /** @var \NotificationChannels\RocketChat\RocketChatMessage $message */
+        /** @var RocketChatMessage $message */
         $message = $notification->toRocketChat($notifiable);
 
-        $to = $message->getChannel() ?: $notifiable->routeNotificationFor('RocketChat');
-        $to = $to ?: $this->rocketChat->getDefaultChannel();
-        if ($to === null) {
+        $channel = $message->getChannel() ?: $notifiable->routeNotificationFor('RocketChat');
+        $channel = $channel ?: $this->rocketChat->getDefaultChannel();
+
+        if (empty($channel)) {
             throw CouldNotSendNotification::missingTo();
         }
 
         $from = $message->getFrom() ?: $this->rocketChat->getToken();
+
         if (! $from) {
             throw CouldNotSendNotification::missingFrom();
         }
 
         try {
-            $this->sendMessage($to, $message);
+            $this->sendMessage($channel, $message);
         } catch (ClientException $exception) {
             throw CouldNotSendNotification::rocketChatRespondedWithAnError($exception);
         } catch (Exception $exception) {
@@ -61,7 +65,8 @@ final class RocketChatWebhookChannel
 
     /**
      * @param  string  $to
-     * @param  \NotificationChannels\RocketChat\RocketChatMessage  $message
+     * @param  RocketChatMessage  $message
+     *
      * @return void
      */
     private function sendMessage(string $to, RocketChatMessage $message): void

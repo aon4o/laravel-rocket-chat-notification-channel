@@ -7,30 +7,31 @@ namespace NotificationChannels\RocketChat;
 class RocketChatMessage
 {
     /** @var string|null RocketChat channel id. */
-    protected $channel = null;
+    protected string|null $channel = null;
 
     /** @var string|null A user or app access token. */
-    protected $from = null;
+    protected string|null $from = null;
 
     /** @var string The text content of the message. */
-    protected $content;
+    protected string $content;
 
-    /** @var string The alias name of the message. */
-    protected $alias;
+    /** @var string|null The alias name of the message. */
+    protected string|null $alias = null;
 
-    /** @var string The avatar emoji of the message. */
-    protected $emoji;
+    /** @var string|null The avatar emoji of the message. */
+    protected string|null $emoji = null;
 
-    /** @var string The avatar image of the message. */
-    protected $avatar;
+    /** @var string|null The avatar image of the message. */
+    protected string|null $avatar = null;
 
-    /** @var \NotificationChannels\RocketChat\RocketChatAttachment[] Attachments of the message. */
-    protected $attachments = [];
+    /** @var RocketChatAttachment[] Attachments of the message. */
+    protected array $attachments = [];
 
     /**
      * Create a new instance of RocketChatMessage.
      *
-     * @param  string $content
+     * @param  string  $content
+     *
      * @return static
      */
     public static function create(string $content = ''): self
@@ -41,19 +42,25 @@ class RocketChatMessage
     /**
      * Create a new instance of RocketChatMessage.
      *
-     * @param string $content
+     * @param  string  $content
      */
     public function __construct(string $content = '')
     {
         $this->content($content);
     }
 
-    public function getChannel(): ?string
+    /**
+     * @return string|null
+     */
+    public function getChannel(): string|null
     {
         return $this->channel;
     }
 
-    public function getFrom(): ?string
+    /**
+     * @return string|null
+     */
+    public function getFrom(): string|null
     {
         return $this->from;
     }
@@ -62,6 +69,7 @@ class RocketChatMessage
      * Set the sender's access token.
      *
      * @param  string  $accessToken
+     *
      * @return $this
      */
     public function from(string $accessToken): self
@@ -74,7 +82,8 @@ class RocketChatMessage
     /**
      * Set the RocketChat channel the message should be sent to.
      *
-     * @param  string $channel
+     * @param  string  $channel
+     *
      * @return $this
      */
     public function to(string $channel): self
@@ -87,7 +96,8 @@ class RocketChatMessage
     /**
      * Set the sender's alias.
      *
-     * @param  string $alias
+     * @param  string  $alias
+     *
      * @return $this
      */
     public function alias(string $alias): self
@@ -100,7 +110,8 @@ class RocketChatMessage
     /**
      * Set the sender's emoji.
      *
-     * @param  string $emoji
+     * @param  string  $emoji
+     *
      * @return $this
      */
     public function emoji(string $emoji): self
@@ -113,7 +124,8 @@ class RocketChatMessage
     /**
      * Set the sender's avatar.
      *
-     * @param  string $avatar
+     * @param  string  $avatar
+     *
      * @return $this
      */
     public function avatar(string $avatar): self
@@ -125,9 +137,10 @@ class RocketChatMessage
 
     /**
      * Set the content of the RocketChat message.
-     * Supports GitHub flavoured markdown.
+     * Supports GitHub flavored Markdown.
      *
      * @param  string  $content
+     *
      * @return $this
      */
     public function content(string $content): self
@@ -140,10 +153,11 @@ class RocketChatMessage
     /**
      * Add an attachment to the message.
      *
-     * @param array|\NotificationChannels\RocketChat\RocketChatAttachment $attachment
+     * @param  array|RocketChatAttachment  $attachment
+     *
      * @return $this
      */
-    public function attachment($attachment): self
+    public function attachment(RocketChatAttachment|array $attachment): self
     {
         if (! ($attachment instanceof RocketChatAttachment)) {
             $attachment = new RocketChatAttachment($attachment);
@@ -157,7 +171,8 @@ class RocketChatMessage
     /**
      * Add multiple attachments to the message.
      *
-     * @param array|\NotificationChannels\RocketChat\RocketChatAttachment[] $attachments
+     * @param  array|RocketChatAttachment[]  $attachments
+     *
      * @return $this
      */
     public function attachments(array $attachments): self

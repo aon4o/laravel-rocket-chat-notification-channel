@@ -6,62 +6,61 @@ namespace NotificationChannels\RocketChat;
 
 use DateTimeInterface;
 use Illuminate\Support\Str;
-use InvalidArgumentException;
 
 class RocketChatAttachment
 {
     /** @var string|null The color you want the order on the left side to be, any value background-css supports. */
-    protected $color;
+    protected string|null $color = null;
 
-    /** @var string|null The text to display for this attachment, it is different than the message’s text. */
-    protected $text;
+    /** @var string|null The text to display for this attachment, it is different from the message’s text. */
+    protected string|null $text = null;
 
     /** @var string|null Displays the time next to the text portion. */
-    protected $timestamp;
+    protected string|null $timestamp = null;
 
-    /** @var string|null An image that displays to the left of the text, looks better when this is relatively small. */
-    protected $thumbnailUrl;
+    /** @var string|null An image that displays to the left of the text looks better when this is relatively small. */
+    protected string|null $thumbnailUrl = null;
 
     /** @var string|null Only applicable if the ts is provided, as it makes the time clickable to this link. */
-    protected $messageLink;
+    protected string|null $messageLink = null;
 
     /** @var bool Causes the image, audio, and video sections to be hiding when collapsed is true. */
-    protected $collapsed = false;
+    protected bool $collapsed = false;
 
     /** @var string|null Name of the author. */
-    protected $authorName;
+    protected string|null $authorName = null;
 
     /** @var string|null Providing this makes the author name clickable and points to this link. */
-    protected $authorLink;
+    protected string|null $authorLink = null;
 
     /** @var string|null Displays a tiny icon to the left of the Author’s name. */
-    protected $authorIcon;
+    protected string|null $authorIcon = null;
 
     /** @var string|null Title to display for this attachment, displays under the author. */
-    protected $title;
+    protected string|null $title = null;
 
     /** @var string|null Providing this makes the title clickable, pointing to this link. */
-    protected $titleLink;
+    protected string|null $titleLink = null;
 
-    /** @var bool When this is true, a download icon appears and clicking this saves the link to file. */
-    protected $titleLinkDownload = false;
+    /** @var bool When this is true, a download icon appears and clicks this saves the link to file. */
+    protected bool $titleLinkDownload = false;
 
     /** @var string|null The image to display, will be “big” and easy to see. */
-    protected $imageUrl;
+    protected string|null $imageUrl = null;
 
-    /** @var string|null Audio file to play, only supports what html audio does. */
-    protected $audioUrl;
+    /** @var string|null Audio file to play, only supports what HTML audio does. */
+    protected string|null $audioUrl = null;
 
-    /** @var string|null Video file to play, only supports what html video does. */
-    protected $videoUrl;
+    /** @var string|null Video file to play, only supports what HTML video does. */
+    protected string|null $videoUrl = null;
 
     /** @var array An array of Attachment Field Objects. */
-    protected $fields = [];
+    protected array $fields = [];
 
     /**
      * RocketChatAttachment constructor.
      *
-     * @param array $data
+     * @param  array  $data
      */
     public function __construct(array $data = [])
     {
@@ -71,17 +70,19 @@ class RocketChatAttachment
     /**
      * Create a new instance of RocketChatAttachment.
      *
-     * @param array $data
-     * @return \NotificationChannels\RocketChat\RocketChatAttachment
+     * @param  array  $data
+     *
+     * @return RocketChatAttachment
      */
-    public static function create(array $data = [])
+    public static function create(array $data = []): RocketChatAttachment
     {
         return new self($data);
     }
 
     /**
-     * @param string $color
-     * @return \NotificationChannels\RocketChat\RocketChatAttachment
+     * @param  string  $color
+     *
+     * @return RocketChatAttachment
      */
     public function color(string $color): self
     {
@@ -91,8 +92,9 @@ class RocketChatAttachment
     }
 
     /**
-     * @param string $text
-     * @return \NotificationChannels\RocketChat\RocketChatAttachment
+     * @param  string  $text
+     *
+     * @return RocketChatAttachment
      */
     public function text(string $text): self
     {
@@ -102,22 +104,12 @@ class RocketChatAttachment
     }
 
     /**
-     * @param string|\DateTimeInterface $timestamp
-     * @return \NotificationChannels\RocketChat\RocketChatAttachment
+     * @param  DateTimeInterface|string  $timestamp
+     *
+     * @return RocketChatAttachment
      */
-    public function timestamp($timestamp): self
+    public function timestamp(DateTimeInterface|string $timestamp): self
     {
-        if (! ($timestamp instanceof DateTimeInterface) && ! is_string($timestamp)) {
-            $invalidType = is_object($timestamp)
-                ? get_class($timestamp)
-                : gettype($timestamp);
-
-            throw new InvalidArgumentException(sprintf(
-                'Timestamp must be string or DateTime, %s given.',
-                $invalidType
-            ));
-        }
-
         if ($timestamp instanceof DateTimeInterface) {
             $timestamp = $timestamp->format(DateTimeInterface::RFC3339);
         }
@@ -128,8 +120,9 @@ class RocketChatAttachment
     }
 
     /**
-     * @param string $thumbnailUrl
-     * @return \NotificationChannels\RocketChat\RocketChatAttachment
+     * @param  string  $thumbnailUrl
+     *
+     * @return RocketChatAttachment
      */
     public function thumbnailUrl(string $thumbnailUrl): self
     {
@@ -139,8 +132,9 @@ class RocketChatAttachment
     }
 
     /**
-     * @param string $messageLink
-     * @return \NotificationChannels\RocketChat\RocketChatAttachment
+     * @param  string  $messageLink
+     *
+     * @return RocketChatAttachment
      */
     public function messageLink(string $messageLink): self
     {
@@ -150,8 +144,9 @@ class RocketChatAttachment
     }
 
     /**
-     * @param bool $collapsed
-     * @return \NotificationChannels\RocketChat\RocketChatAttachment
+     * @param  bool  $collapsed
+     *
+     * @return RocketChatAttachment
      */
     public function collapsed(bool $collapsed): self
     {
@@ -161,10 +156,11 @@ class RocketChatAttachment
     }
 
     /**
-     * @param string $name
-     * @param string $link
-     * @param string $icon
-     * @return \NotificationChannels\RocketChat\RocketChatAttachment
+     * @param  string  $name
+     * @param  string  $link
+     * @param  string  $icon
+     *
+     * @return RocketChatAttachment
      */
     public function author(string $name, string $link = '', string $icon = ''): self
     {
@@ -176,8 +172,9 @@ class RocketChatAttachment
     }
 
     /**
-     * @param string $authorName
-     * @return \NotificationChannels\RocketChat\RocketChatAttachment
+     * @param  string  $authorName
+     *
+     * @return RocketChatAttachment
      */
     public function authorName(string $authorName): self
     {
@@ -187,8 +184,9 @@ class RocketChatAttachment
     }
 
     /**
-     * @param string $authorLink
-     * @return \NotificationChannels\RocketChat\RocketChatAttachment
+     * @param  string  $authorLink
+     *
+     * @return RocketChatAttachment
      */
     public function authorLink(string $authorLink): self
     {
@@ -198,8 +196,9 @@ class RocketChatAttachment
     }
 
     /**
-     * @param string $authorIcon
-     * @return \NotificationChannels\RocketChat\RocketChatAttachment
+     * @param  string  $authorIcon
+     *
+     * @return RocketChatAttachment
      */
     public function authorIcon(string $authorIcon): self
     {
@@ -209,8 +208,9 @@ class RocketChatAttachment
     }
 
     /**
-     * @param string $title
-     * @return \NotificationChannels\RocketChat\RocketChatAttachment
+     * @param  string  $title
+     *
+     * @return RocketChatAttachment
      */
     public function title(string $title): self
     {
@@ -220,8 +220,9 @@ class RocketChatAttachment
     }
 
     /**
-     * @param string $titleLink
-     * @return \NotificationChannels\RocketChat\RocketChatAttachment
+     * @param  string  $titleLink
+     *
+     * @return RocketChatAttachment
      */
     public function titleLink(string $titleLink): self
     {
@@ -231,8 +232,9 @@ class RocketChatAttachment
     }
 
     /**
-     * @param bool $titleLinkDownload
-     * @return \NotificationChannels\RocketChat\RocketChatAttachment
+     * @param  bool  $titleLinkDownload
+     *
+     * @return RocketChatAttachment
      */
     public function titleLinkDownload(bool $titleLinkDownload): self
     {
@@ -242,8 +244,9 @@ class RocketChatAttachment
     }
 
     /**
-     * @param string $imageUrl
-     * @return \NotificationChannels\RocketChat\RocketChatAttachment
+     * @param  string  $imageUrl
+     *
+     * @return RocketChatAttachment
      */
     public function imageUrl(string $imageUrl): self
     {
@@ -253,8 +256,9 @@ class RocketChatAttachment
     }
 
     /**
-     * @param string $audioUrl
-     * @return \NotificationChannels\RocketChat\RocketChatAttachment
+     * @param  string  $audioUrl
+     *
+     * @return RocketChatAttachment
      */
     public function audioUrl(string $audioUrl): self
     {
@@ -264,8 +268,9 @@ class RocketChatAttachment
     }
 
     /**
-     * @param string $videoUrl
-     * @return \NotificationChannels\RocketChat\RocketChatAttachment
+     * @param  string  $videoUrl
+     *
+     * @return RocketChatAttachment
      */
     public function videoUrl(string $videoUrl): self
     {
@@ -275,8 +280,9 @@ class RocketChatAttachment
     }
 
     /**
-     * @param array $fields
-     * @return \NotificationChannels\RocketChat\RocketChatAttachment
+     * @param  array  $fields
+     *
+     * @return RocketChatAttachment
      */
     public function fields(array $fields): self
     {
@@ -315,19 +321,20 @@ class RocketChatAttachment
     /**
      * Set attachment data from array.
      *
-     * @param array $data
+     * @param  array  $data
+     *
      * @return void
      */
     private function setPropertiesFromArray(array $data): void
     {
         foreach ($data as $key => $value) {
-            $methodName = Str::camel($key);
+            $method_name = Str::camel($key);
 
-            if (! method_exists($this, $methodName)) {
+            if (! method_exists($this, $method_name)) {
                 continue;
             }
 
-            $this->{$methodName}($value);
+            $this->{$method_name}($value);
         }
     }
 }

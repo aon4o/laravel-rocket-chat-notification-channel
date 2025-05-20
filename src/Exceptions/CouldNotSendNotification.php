@@ -17,7 +17,7 @@ final class CouldNotSendNotification extends RuntimeException
      */
     public static function missingTo(): self
     {
-        return new static('RocketChat notification was not sent. Channel identifier is missing.');
+        return new self('RocketChat notification was not sent. Channel identifier is missing.');
     }
 
     /**
@@ -27,13 +27,14 @@ final class CouldNotSendNotification extends RuntimeException
      */
     public static function missingFrom(): self
     {
-        return new static('RocketChat notification was not sent. Access token is missing.');
+        return new self('RocketChat notification was not sent. Access token is missing.');
     }
 
     /**
      * Thrown when there's a bad response from the RocketChat.
      *
-     * @param  \GuzzleHttp\Exception\ClientException  $exception
+     * @param  ClientException  $exception
+     *
      * @return static
      */
     public static function rocketChatRespondedWithAnError(ClientException $exception): self
@@ -41,17 +42,18 @@ final class CouldNotSendNotification extends RuntimeException
         $message = $exception->getResponse()->getBody();
         $code = $exception->getResponse()->getStatusCode();
 
-        return new static("RocketChat responded with an error `{$code} - {$message}`");
+        return new self("RocketChat responded with an error `$code - $message`");
     }
 
     /**
      * Thrown when we're unable to communicate with RocketChat.
      *
-     * @param  \Exception  $exception
+     * @param  Exception  $exception
+     *
      * @return static
      */
     public static function couldNotCommunicateWithRocketChat(Exception $exception): self
     {
-        return new static("The communication with RocketChat failed. Reason: {$exception->getMessage()}");
+        return new self("The communication with RocketChat failed. Reason: {$exception->getMessage()}");
     }
 }

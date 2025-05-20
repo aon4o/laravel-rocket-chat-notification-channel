@@ -5,33 +5,39 @@ declare(strict_types=1);
 namespace NotificationChannels\RocketChat;
 
 use GuzzleHttp\Client as HttpClient;
+use GuzzleHttp\Exception\GuzzleException;
 
 final class RocketChat
 {
-    /** @var \GuzzleHttp\Client */
-    private $http;
+    /** @var HttpClient */
+    private HttpClient $http;
 
     /** @var string */
-    private $url;
+    private string $url;
 
     /** @var string */
-    private $token;
+    private string $token;
 
     /** @var string */
-    private $userId;
+    private string $userId;
 
     /** @var string|null */
-    private $defaultChannel;
+    private string|null $defaultChannel;
 
     /**
-     * @param  \GuzzleHttp\Client  $http
+     * @param  HttpClient  $http
      * @param  string  $url
      * @param  string  $token
+     * @param  string  $user_id
      * @param  string|null  $defaultChannel
-     * @return void
      */
-    public function __construct(HttpClient $http, string $url, string $token, string $user_id, ?string $defaultChannel = null)
-    {
+    public function __construct(
+        HttpClient $http,
+        string $url,
+        string $token,
+        string $user_id,
+        string|null $defaultChannel = null,
+    ) {
         $this->http = $http;
         $this->url = rtrim($url, '/');
         $this->token = $token;
@@ -54,7 +60,7 @@ final class RocketChat
      *
      * @return string|null
      */
-    public function getDefaultChannel(): ?string
+    public function getDefaultChannel(): string|null
     {
         return $this->defaultChannel;
     }
@@ -64,13 +70,16 @@ final class RocketChat
      *
      * @param  string  $to
      * @param  array  $message
+     *
      * @return void
+     *
+     * @throws GuzzleException
      */
     public function sendMessage(string $to, array $message): void
     {
-        $url = sprintf('%s/api/v1/chat.postMessage', $this->url);
+        $endpoint = sprintf('%s/api/v1/chat.postMessage', $this->url);
 
-        $this->post($url, [
+        $this->post($endpoint, [
             'headers' => [
                 'X-Auth-Token' => $this->token,
                 'X-User-Id' => $this->userId,
@@ -84,11 +93,14 @@ final class RocketChat
     }
 
     /**
-     * Perform a simple post request.
+     * Perform a simple POST request.
      *
      * @param  string  $url
      * @param  array  $options
+     *
      * @return void
+     *
+     * @throws GuzzleException
      */
     private function post(string $url, array $options): void
     {
