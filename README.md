@@ -15,12 +15,11 @@ The package uses the REST API of RocketChat to send messages to channels instead
     - [Setting up the RocketChat service](#setting-up-the-rocketchat-service)
 - [Usage](#usage)
     - [Available Message methods](#available-message-methods)
-- [Changelog](#changelog)
 - [Testing](#testing)
+- [Linting](#linting)
 - [Security](#security)
-- [Contributing](#contributing)
 - [Credits](#credits)
-- [Change log](#changelog)
+- [Change log](#change-log)
 - [License](#license)
 
 ## Installation
@@ -97,7 +96,7 @@ public function routeNotificationForRocketChat(): string
 
 `to()`: Specifies the channel id to send the notification to (overridden by `routeNotificationForRocketChat` if empty).
 
-`content()`: Sets a content of the notification message. Supports Github flavoured markdown.
+`content()`: Sets a content of the notification message. Supports GitHub flavored Markdown.
 
 `alias()`:  This will cause the message’s name to appear as the given alias, but your username will still display.
 
@@ -113,7 +112,7 @@ public function routeNotificationForRocketChat(): string
 
 ### Adding Attachment
 
-There are several ways to add one ore more attachments to a message
+There are several ways to add one or more attachments to a message
 
 ```php
 public function toRocketChat($notifiable)
@@ -184,19 +183,21 @@ public function toRocketChat($notifiable)
 ];   
 ```
 
-## Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
-
 ## Testing
 
 ```shell script
-$ vendor/bin/phpunit
+$ composer test
+```
+
+## Linting
+
+```shell script
+$ composer lint
 ```
 
 ## Security
 
-If you discover any security related issues, please email open@cybercog.su instead of using the issue tracker.
+If you discover any security related issues, please email a.o.naidenov@gmail.com instead of using the issue tracker.
 
 ## Credits
 
