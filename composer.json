@@ -1,6 +1,6 @@
 {
     "name": "aon4o/laravel-rocket-chat-notification-channel",
-    "description": "Rocket.Chat REST API Notifications channel for Laravel 5.6+",
+    "description": "Rocket.Chat REST API Notifications channel for Laravel",
     "homepage": "https://github.com/aon4o/laravel-rocket-chat-notification-channel",
     "license": "MIT",
     "keywords": [

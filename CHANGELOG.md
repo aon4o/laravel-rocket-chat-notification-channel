@@ -2,7 +2,7 @@
 
 All notable changes to `aon4o/laravel-rocket-chat-notifications-channel` will be documented in this file
 
-## [0.4.0] - 2025-TODO
+## [0.4.0] - 2025-05-20
 
 ### Added
 
@@ -10,7 +10,7 @@ All notable changes to `aon4o/laravel-rocket-chat-notifications-channel` will be
 
 ### Removed
 
-- Removed support for PHP 5 and 7
+- Removed support for PHP 5, 7, 8.0
 - Removed support for Laravel 5, 6, 7, 8, 9
 
 ### Changed

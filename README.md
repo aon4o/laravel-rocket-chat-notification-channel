@@ -1,12 +1,8 @@
 # Rocket.Chat REST API Laravel Notifications Channel
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/rocket-chat.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/rocket-chat)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/aon4o/laravel-rocket-chat-notification-channel.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/rocket-chat)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/laravel-notification-channels/rocket-chat/master.svg?style=flat-square)](https://travis-ci.org/laravel-notification-channels/rocket-chat)
-[![StyleCI](https://styleci.io/repos/241828511/shield)](https://styleci.io/repos/241828511)
-[![Quality Score](https://img.shields.io/scrutinizer/g/laravel-notification-channels/rocket-chat.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/rocket-chat)
-[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/laravel-notification-channels/rocket-chat/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/rocket-chat/?branch=master)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/rocket-chat.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/rocket-chat)
+[![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/rocket-chat.svg?style=flat-square)](https://packagist.org/packages/aon4o/laravel-rocket-chat-notification-channel)
 
 ## Introduction
 
