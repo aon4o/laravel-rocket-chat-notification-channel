@@ -7,7 +7,7 @@ use GuzzleHttp\Psr7\Response;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use NotificationChannels\RocketChat\Exceptions\CouldNotSendNotification;
 use NotificationChannels\RocketChat\RocketChat;
-use NotificationChannels\RocketChat\RocketChatWebhookChannel;
+use NotificationChannels\RocketChat\RocketChatChannel;
 use Tests\Fixtures\TestNotifiable;
 use Tests\Fixtures\TestNotification;
 use Tests\Fixtures\TestNotificationWithMissedChannel;
@@ -37,11 +37,11 @@ it('can send a notification', function () {
                     'text' => 'hello',
                     'channel' => $channel,
                 ],
-            ]
+            ],
         )->andReturn(new Response(200));
 
     $rocketChat = new RocketChat($client, $apiBaseUrl, $token, $user_id, $channel);
-    $channel = new RocketChatWebhookChannel($rocketChat);
+    $channel = new RocketChatChannel($rocketChat);
     $channel->send(new TestNotifiable(), new TestNotification());
 });
 
@@ -68,11 +68,11 @@ it('handles generic errors', function () {
                     'text' => 'hello',
                     'channel' => $channel,
                 ],
-            ]
+            ],
         )->andThrow(new Exception('Test'));
 
     $rocketChat = new RocketChat($client, $apiBaseUrl, $token, $user_id, $channel);
-    $channel = new RocketChatWebhookChannel($rocketChat);
+    $channel = new RocketChatChannel($rocketChat);
     $channel->send(new TestNotifiable(), new TestNotification());
 });
 
@@ -80,7 +80,7 @@ it('does not send a message when channel missed', function () {
     $this->expectException(CouldNotSendNotification::class);
 
     $rocketChat = new RocketChat(new GuzzleHttpClient(), '', '', '', '', '');
-    $channel = new RocketChatWebhookChannel($rocketChat);
+    $channel = new RocketChatChannel($rocketChat);
     $channel->send(new TestNotifiable(), new TestNotificationWithMissedChannel());
 });
 
@@ -88,6 +88,6 @@ it('does not send a message when from missed', function () {
     $this->expectException(CouldNotSendNotification::class);
 
     $rocketChat = new RocketChat(new GuzzleHttpClient(), '', '', '', '');
-    $channel = new RocketChatWebhookChannel($rocketChat);
+    $channel = new RocketChatChannel($rocketChat);
     $channel->send(new TestNotifiable(), new TestNotificationWithMissedFrom());
 });

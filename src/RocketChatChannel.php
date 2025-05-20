@@ -6,10 +6,11 @@ namespace NotificationChannels\RocketChat;
 
 use Exception;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\RocketChat\Exceptions\CouldNotSendNotification;
 
-final class RocketChatWebhookChannel
+final class RocketChatChannel
 {
     /** @var RocketChat The HTTP client instance. */
     private RocketChat $rocketChat;
@@ -35,6 +36,7 @@ final class RocketChatWebhookChannel
      * @return void
      *
      * @throws CouldNotSendNotification
+     * @throws GuzzleException
      */
     public function send(mixed $notifiable, Notification $notification): void
     {
@@ -68,6 +70,8 @@ final class RocketChatWebhookChannel
      * @param  RocketChatMessage  $message
      *
      * @return void
+     *
+     * @throws GuzzleException
      */
     private function sendMessage(string $to, RocketChatMessage $message): void
     {

@@ -65,14 +65,14 @@ You can use the channel in your `via()` method inside the notification:
 ```php
 use Illuminate\Notifications\Notification;
 use NotificationChannels\RocketChat\RocketChatMessage;
-use NotificationChannels\RocketChat\RocketChatWebhookChannel;
+use NotificationChannels\RocketChat\RocketChatChannel;
 
 class TaskCompleted extends Notification
 {
     public function via($notifiable): array
     {
         return [
-            RocketChatWebhookChannel::class,
+            RocketChatChannel::class,
         ];
     }
 

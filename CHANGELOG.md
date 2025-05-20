@@ -7,13 +7,16 @@ All notable changes to `aon4o/laravel-rocket-chat-notifications-channel` will be
 ### Added
 
 - Added stricter type hinting to all internal classes and methods
-- Added support for Rocket.Chat notifications through REST API
 
 ### Removed
 
 - Removed support for PHP 5 and 7
 - Removed support for Laravel 5, 6, 7, 8, 9
-- Rocket.Chat notifications through Webhooks are no longer supported
+
+### Changed
+
+- Rocket.Chat notifications are now sent through REST API instead of Webhooks
+- `RocketChatWebhookChannel` class renamed to `RocketChatChannel`
 
 ## [0.3.0] - 2020-09-09
 

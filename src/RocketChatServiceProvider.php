@@ -18,7 +18,7 @@ final class RocketChatServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->app
-            ->when(RocketChatWebhookChannel::class)
+            ->when(RocketChatChannel::class)
             ->needs(RocketChat::class)
             ->give(function () {
                 return new RocketChat(
@@ -26,7 +26,7 @@ final class RocketChatServiceProvider extends ServiceProvider
                     Config::get('services.rocketchat.url'),
                     Config::get('services.rocketchat.token'),
                     Config::get('services.rocketchat.user_id'),
-                    Config::get('services.rocketchat.channel')
+                    Config::get('services.rocketchat.channel'),
                 );
             });
     }
